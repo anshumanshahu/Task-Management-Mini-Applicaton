@@ -1,7 +1,7 @@
 const pool = require("../config/db");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-// ✅ REGISTER (MISSING THA)
+
 exports.register = async (req, res) => {
   try {
     const { name, email, password } = req.body;

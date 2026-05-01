@@ -32,29 +32,6 @@
 ### Database
 - PostgreSQL
 
----
-
-## Project Structure
-
-
-Project/
-│
-├── backend/
-│ ├── src/
-│ │ ├── controllers/
-│ │ ├── routes/
-│ │ ├── middlewares/
-│ │ ├── config/
-│ │ └── app.js
-│ └── package.json
-│
-├── frontend/
-│ ├── src/
-│ │ ├── pages/
-│ │ ├── api.js
-│ │ └── App.js
-│ └── package.json
-
 
 ---
 

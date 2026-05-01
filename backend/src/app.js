@@ -23,3 +23,7 @@ pool.connect()
 const authRoutes = require("./routes/authRoutes");
 
 app.use("/api/v1/auth", authRoutes);
+
+const testRoutes = require("./routes/testRoutes");
+
+app.use("/api/v1", testRoutes);

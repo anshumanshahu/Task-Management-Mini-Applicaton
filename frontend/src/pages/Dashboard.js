@@ -29,9 +29,14 @@ export default function Dashboard() {
   };
 
   const handleDelete = async (id) => {
-    await deleteTask(token, id);
+  try {
+    const res = await deleteTask(token, id);
+    console.log("DELETE SUCCESS:", res);
     fetchTasks();
-  };
+  } catch (err) {
+    alert(err.message);
+  }
+};
 
   const handleLogout = () => {
     localStorage.removeItem("token");

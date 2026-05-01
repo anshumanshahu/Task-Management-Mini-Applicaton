@@ -37,10 +37,14 @@ exports.getTasks = async (req, res) => {
 // DELETE TASK (admin only)
 exports.deleteTask = async (req, res) => {
   try {
-    await pool.query(
-      "DELETE FROM tasks WHERE id=$1",
-      [req.params.id]
+    const result = await pool.query(
+      "DELETE FROM tasks WHERE id=$1 AND user_id=$2 RETURNING *",
+      [req.params.id, req.user.id]
     );
+
+    if (result.rowCount === 0) {
+      return res.status(404).json({ msg: "Task not found or not yours" });
+    }
 
     res.json({ msg: "Task deleted" });
 

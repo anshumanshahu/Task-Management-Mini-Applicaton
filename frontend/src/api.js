@@ -81,10 +81,17 @@ export const deleteTask = async (token, id) => {
   const res = await fetch(`${BASE_URL}/tasks/${id}`, {
     method: "DELETE",
     headers: {
+      "Content-Type": "application/json",
       Authorization: token,
     },
   });
 
-  return res.json();
+  const data = await res.json();
+
+  if (!res.ok) {
+    throw new Error(data.msg || "Delete failed");
+  }
+
+  return data;
 };
 

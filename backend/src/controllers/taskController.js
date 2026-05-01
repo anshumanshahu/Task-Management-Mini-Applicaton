@@ -37,14 +37,23 @@ exports.getTasks = async (req, res) => {
 // DELETE TASK (admin only)
 exports.deleteTask = async (req, res) => {
   try {
-    const result = await pool.query(
-      "DELETE FROM tasks WHERE id=$1 AND user_id=$2 RETURNING *",
-      [req.params.id, req.user.id]
+    const taskId = req.params.id;
+
+    // check task ownership OR admin
+    const task = await pool.query(
+      "SELECT * FROM tasks WHERE id=$1",
+      [taskId]
     );
 
-    if (result.rowCount === 0) {
-      return res.status(404).json({ msg: "Task not found or not yours" });
+    if (!task.rows.length) {
+      return res.status(404).json({ msg: "Task not found" });
     }
+
+    if (task.rows[0].user_id !== req.user.id && req.user.role !== "admin") {
+      return res.status(403).json({ msg: "Not allowed to delete this task" });
+    }
+
+    await pool.query("DELETE FROM tasks WHERE id=$1", [taskId]);
 
     res.json({ msg: "Task deleted" });
 

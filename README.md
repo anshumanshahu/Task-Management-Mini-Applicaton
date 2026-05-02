@@ -54,7 +54,7 @@ Backend `.env` (recommended):
 
 ### 1. Clone Repository
 
-https://github.com/anshumanshahu/.git
+https://github.com/anshumanshahu/Task-Management-Mini-Applicaton.git
 
 
 cd Task-Management-Mini-Applicaton

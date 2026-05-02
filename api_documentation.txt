@@ -1,0 +1,111 @@
+# API Documentation
+
+Base URL:
+http://localhost:5000/api/v1
+
+---
+
+## Authentication APIs
+
+### Register User
+POST /auth/register
+
+Request Body:
+{
+  "email": "user@example.com",
+  "password": "123456"
+}
+
+Response:
+{
+  "msg": "User registered"
+}
+
+---
+
+### Login User
+POST /auth/login
+
+Request Body:
+{
+  "email": "user@example.com",
+  "password": "123456"
+}
+
+Response:
+{
+  "token": "jwt_token_here"
+}
+
+---
+
+## Task APIs
+
+### Get Tasks
+GET /tasks
+
+Headers:
+Authorization: <token>
+
+Response:
+[
+  {
+    "id": 1,
+    "title": "Task 1",
+    "description": "Sample task",
+    "user_id": 1
+  }
+]
+
+---
+
+### Create Task
+POST /tasks
+
+Headers:
+Authorization: <token>
+
+Request Body:
+{
+  "title": "New Task",
+  "description": "Task description"
+}
+
+Response:
+{
+  "id": 2,
+  "title": "New Task",
+  "description": "Task description"
+}
+
+---
+
+### Delete Task
+DELETE /tasks/:id
+
+Headers:
+Authorization: <token>
+
+Response:
+{
+  "msg": "Task deleted"
+}
+
+---
+
+## Error Responses
+
+401 Unauthorized:
+{
+  "msg": "Invalid token"
+}
+
+403 Forbidden:
+{
+  "msg": "Admin access required"
+}
+
+500 Server Error:
+{
+  "msg": "Internal server error"
+}

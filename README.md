@@ -169,8 +169,11 @@ CREATE TABLE tasks (
 - Protected routes
 - Role-based access control
 
+## GitHub Repo And Project Video Demonstration Link, Project Summary Doc
 
-
+- Github : https://github.com/anshumanshahu/Task-Management-Mini-Applicaton.git
+- Video Link : https://drive.google.com/file/d/1u-X5Wj7eBoxkwlZFkhUytccJpCFU0yg4/view?usp=sharing
+- Doc : https://drive.google.com/file/d/1pwXMOJwvpGihye6xrlc0NFYUimtu9mbm/view?usp=sharing
 
 ---
 

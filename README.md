@@ -169,26 +169,8 @@ CREATE TABLE tasks (
 - Protected routes
 - Role-based access control
 
----
 
-## Scalability Considerations
 
-- Stateless authentication using JWT allows horizontal scaling
-- Modular project structure enables easy addition of new features
-- Database indexing on user_id for faster queries
-- Can be extended with:
-  - Redis caching
-  - Microservices architecture
-  - Load balancing
-
----
-
-## Known Limitations
-
-- No pagination implemented
-- No update task API
-- Basic frontend UI
-- Limited validation
 
 ---
 

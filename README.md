@@ -1,128 +1,194 @@
 # Task Management Mini Application
 
+## Overview
+This project is a full-stack Task Management Application built as part of a Backend Developer Internship assignment.
+
 ---
 
 ## Features
 
-- User Registration and Login (JWT Authentication)
-- Create Tasks
-- View User-Specific Tasks
-- Delete Tasks (Admin Only)
-- Role-Based Access Control
-- REST API backend
-- React frontend dashboard
+### Backend
+- User Registration and Login with JWT Authentication
+- Password hashing for security
+- Role-based access control (User/Admin)
+- CRUD APIs for Tasks
+- Protected routes using middleware
+- PostgreSQL database integration
+- Error handling and modular architecture
+
+### Frontend
+- Built using React.js
+- User authentication (Login/Register)
+- Dashboard to manage tasks
+- Create and delete tasks
+- API integration using Fetch API
 
 ---
 
 ## Tech Stack
 
-### Frontend
-- React
-- JavaScript
-- Fetch API
-- CSS (Inline styling)
-
 ### Backend
 - Node.js
 - Express.js
-- PostgreSQL 16
-- JWT Authentication
-- bcrypt (if used for password hashing)
-
-### Database
 - PostgreSQL
+- JWT Authentication
+
+### Frontend
+- React.js
+- JavaScript
+- CSS
+
+---
+
+## Project Structure
+
+
+# frontend/src
+├── api.js
+├── App.css
+├── App.js
+├── App.test.js
+├── index.css
+├── index.js
+├── logo.svg
+├── pages
+│   ├── Dashboard.js
+│   ├── Login.js
+│   └── Register.js
+├── reportWebVitals.js
+└── setupTests.js
+
+# backend/src/
+├── app.js
+├── config
+│   └── db.js
+├── controllers
+│   ├── authController.js
+│   └── taskController.js
+├── middlewares
+│   ├── authMiddleware.js
+│   └── roleMiddleware.js
+├── models
+└── routes
+    ├── authRoutes.js
+    ├── taskRoutes.js
+    └── testRoutes.js
 
 
 ---
 
-## Environment Variables
-
-Backend `.env` (recommended):
-
-
-- PORT=5000
-- DATABASE_URL=postgresql://postgres:postgres@localhost:5432/primetrade
-- JWT_SECRET=secret
-
-
----
-## U can also see the video that available on this path
-
-  /home/anshuman/Desktop/Project/Project.webm  
-
-## Installation & Setup
+## Setup Instructions
 
 ### 1. Clone Repository
 
-https://github.com/anshumanshahu/Task-Management-Mini-Applicaton.git
-
-
-cd Task-Management-Mini-Applicaton
-
+git clone https://github.com/anshumanshahu/Task-Management-Mini-Applicaton.git
 
 ---
 
 ### 2. Backend Setup
-
-
-cd backend
-npm install
-npm start
-
-
-Server runs on:
-
-http://localhost:5000
+- cd backend
+- npm install
+- npm start
+ backend runs on localhost 5000
 
 
 ---
 
 ### 3. Frontend Setup
 
+- cd frontend
+- npm install
+- npm start
 
-cd frontend
-npm install
-npm start
-
-
+  
 Frontend runs on:
 
 http://localhost:3000
+
+
+
+## Environment Variables
+
+Create a `.env` file inside backend:
+
+
+PORT=5000
+DATABASE_URL=postgresql://postgres:postgres@localhost:5432/primetrade
+JWT_SECRET=your_secret_key
+
 
 
 ---
 
 ## API Endpoints
 
-### Auth Routes
+### Authentication
+- POST `/api/v1/auth/register`
+- POST `/api/v1/auth/login`
 
-
-- POST /api/v1/auth/register
-- POST /api/v1/auth/login
-
-
-### Task Routes
-
-
-- GET /api/v1/tasks (Authenticated user)
-- POST /api/v1/tasks (Create task)
-- DELETE /api/v1/tasks/:id (Admin only)
-
+### Tasks
+- GET `/api/v1/tasks` (Protected)
+- POST `/api/v1/tasks` (Protected)
+- DELETE `/api/v1/tasks/:id` (Protected, role-based)
 
 ---
+### Step 5: Create Users Table
+```sql
+CREATE TABLE users (
+  id SERIAL PRIMARY KEY,
+  name VARCHAR(100),
+  email VARCHAR(100) UNIQUE NOT NULL,
+  password TEXT NOT NULL,
+  role VARCHAR(10) DEFAULT 'user'
+);
+```
+
+### Step 6: Create Tasks Table
+```sql
+CREATE TABLE tasks (
+  id SERIAL PRIMARY KEY,
+  title VARCHAR(255),
+  description TEXT,
+  user_id INTEGER REFERENCES users(id)
+);
+```
 
 ## Authentication Flow
 
-- User logs in → receives JWT token
-- Token stored in localStorage
-- Token sent in Authorization header
-- Backend verifies token for protected routes
+- User logs in and receives a JWT token
+- Token is stored in localStorage
+- Token is sent in Authorization header for protected APIs
+- Backend verifies token using middleware
 
+---
 
-## Notes
+## Security Practices
 
-- PostgreSQL must be running locally
-- JWT secret should not be hardcoded in production
+- Password hashing
+- JWT authentication
+- Protected routes
+- Role-based access control
+
+---
+
+## Scalability Considerations
+
+- Stateless authentication using JWT allows horizontal scaling
+- Modular project structure enables easy addition of new features
+- Database indexing on user_id for faster queries
+- Can be extended with:
+  - Redis caching
+  - Microservices architecture
+  - Load balancing
+
+---
+
+## Known Limitations
+
+- No pagination implemented
+- No update task API
+- Basic frontend UI
+- Limited validation
 
 ---
 
